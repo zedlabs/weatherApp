@@ -35,6 +35,9 @@ android {
         freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -52,6 +55,10 @@ dependencies {
 
     // Navigation Component
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha10"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
