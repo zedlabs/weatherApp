@@ -3,16 +3,19 @@ package ml.zedlabs.weatherapptask.ui
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ml.zedlabs.weatherapptask.repository.models.WeatherResponse
 
-class CityListAdapter(private val list: List<String>) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>() {
+class CityListAdapter(private val list: List<String>, private val onClick: (String) -> Unit) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>() {
 
     class CityViewHolder(tv: TextView) : RecyclerView.ViewHolder(tv) {
         var textView : TextView = tv
 
         init {
-            tv.setOnClickListener {
+            tv.setOnClickListener {  }
+        }
 
-            }
+        fun bind(data: String, clickListener: (String) -> Unit) {
+            itemView.setOnClickListener { clickListener(data) }
         }
     }
 
@@ -25,6 +28,7 @@ class CityListAdapter(private val list: List<String>) : RecyclerView.Adapter<Cit
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
         holder.textView.text = list[position]
+        holder.bind(list[position], onClick)
     }
 
     override fun getItemCount(): Int = list.size

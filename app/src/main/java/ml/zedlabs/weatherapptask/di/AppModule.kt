@@ -1,9 +1,14 @@
 package ml.zedlabs.weatherapptask.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ml.zedlabs.weatherapptask.repository.localDb.WeatherDao
+import ml.zedlabs.weatherapptask.repository.localDb.WeatherDatabase
 import ml.zedlabs.weatherapptask.repository.remote.JsonApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,5 +45,20 @@ class AppModule {
     companion object {
         val baseUrl = "https://api.openweathermap.org"
         val apiKey = "615f14c55db3b977157e1ea2887870d4"
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext application: Context): WeatherDatabase {
+        return Room
+            .databaseBuilder(application, WeatherDatabase::class.java, "weather-database")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDao(weatherdatabase: WeatherDatabase) : WeatherDao {
+        return weatherdatabase.getWeatherDao()
     }
 }

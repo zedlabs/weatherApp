@@ -1,17 +1,20 @@
 package ml.zedlabs.weatherapptask.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import ml.zedlabs.weatherapptask.databinding.FragmentSearchBinding
 import ml.zedlabs.weatherapptask.util.Cdata
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
+    val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
@@ -21,8 +24,12 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        binding.recyclerViewCityList.adapter = CityListAdapter(Cdata.cityList)
-        binding.recyclerViewCityList.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewCityList.apply {
+            adapter = CityListAdapter(Cdata.cityList){
+                viewModel.getCityWeatherData(it)
+            }
+            layoutManager = LinearLayoutManager(requireContext())
+        }
         return binding.root
     }
 
