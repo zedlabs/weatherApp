@@ -5,20 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ml.zedlabs.weatherapptask.R
 import ml.zedlabs.weatherapptask.databinding.FragmentListBinding
+import ml.zedlabs.weatherapptask.repository.models.CityWeatherData
+import ml.zedlabs.weatherapptask.util.Cdata
 
 @AndroidEntryPoint
-class ListFragment : Fragment() {
+class ListFragment : Fragment() , FavListAdapter.OnItemClickListener{
 
-    val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
+
+    private val favAdapter = FavListAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +36,27 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.listToSearch)
         }
 
-        viewModel.getFavCityData()
-        Log.e("12", "1->onCreateView: ${viewModel.data.value?.get(0)?.city}")
+        //viewModel.getFavCityData()
+        binding.recyclerViewFav.apply {
+            adapter = favAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        viewModel.data.observe(viewLifecycleOwner, {
+            Log.e("listFragment", "1->onCreateView: ${it.size}")
+            favAdapter.submitList(it)
+        })
+
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(item: CityWeatherData) {
+
     }
 }

@@ -1,18 +1,23 @@
 package ml.zedlabs.weatherapptask.repository.localDb
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import ml.zedlabs.weatherapptask.repository.models.CityWeatherData
 
 @Dao
 interface WeatherDao {
 
     @Query("SELECT * FROM weather")
-    suspend fun getAll(): List<CityWeatherData>
+    fun getAll(): Flow<List<CityWeatherData>>
 
     @Insert
     suspend fun insertCityWeather(data: CityWeatherData)
+
+    @Query("SELECT * FROM weather WHERE id == :current")
+    fun getDetailsById(current: Int): LiveData<CityWeatherData>
 
 //    @Query("SELECT * FROM notes WHERE title LIKE '%' || :titleParam || '%' ")
 //    fun searchQuery(titleParam: String): Flow<List<Note>>

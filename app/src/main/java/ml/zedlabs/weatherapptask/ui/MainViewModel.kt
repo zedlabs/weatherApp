@@ -1,7 +1,9 @@
 package ml.zedlabs.weatherapptask.ui
 
+import android.util.Log
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ml.zedlabs.weatherapptask.repository.MainRepository
 import ml.zedlabs.weatherapptask.repository.models.CityWeatherData
@@ -13,8 +15,8 @@ class MainViewModel @Inject constructor(
     val repository: MainRepository
 ) : ViewModel() {
 
-    val _data  = MutableLiveData<List<CityWeatherData>>()
-    val data : LiveData<List<CityWeatherData>> = _data
+    var _data = repository.cityWeatherList.asLiveData()
+    val data: LiveData<List<CityWeatherData>> = _data
 
     fun getCityWeatherData(city: String) {
         viewModelScope.launch {
@@ -23,11 +25,17 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getFavCityData(){
+    init {
         viewModelScope.launch {
-            _data.value = repository.getFavCityData()
+            delay(2000)
+            Log.e("viewModel", "1-> ${data.value?.size}")
         }
 
+
     }
+//    fun getFavCityData(){
+//
+//
+//    }
 
 }
