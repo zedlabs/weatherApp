@@ -1,7 +1,8 @@
 package ml.zedlabs.weatherapptask.repository
 
-import android.util.Log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import ml.zedlabs.weatherapptask.di.AppModule
 import ml.zedlabs.weatherapptask.repository.localDb.WeatherDao
 import ml.zedlabs.weatherapptask.repository.models.CityWeatherData
@@ -11,8 +12,8 @@ import ml.zedlabs.weatherapptask.util.toCWD
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
-    val jsonApi: JsonApi,
-    val dao: WeatherDao
+    private val jsonApi: JsonApi,
+    private val dao: WeatherDao
 ) {
 
     val cityWeatherList: Flow<List<CityWeatherData>> = dao.getAll()
@@ -22,9 +23,10 @@ class MainRepository @Inject constructor(
     }
 
     suspend fun insertCityWeatherData(weatherResponse: WeatherResponse) {
-        Log.e("repo", "1->insertCityWeatherData: ${weatherResponse.name}")
-        if (dao.getDetailsById(weatherResponse.id).value == null)
-            dao.insertCityWeather(weatherResponse.toCWD())
+        withContext(Dispatchers.IO) {
+            if (dao.getDetailsById(weatherResponse.id).isEmpty())
+                dao.insertCityWeather(weatherResponse.toCWD())
+        }
     }
 
 }
