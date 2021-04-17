@@ -8,8 +8,10 @@ data class CityWeatherData (
     @PrimaryKey val id: Int,
     val city: String,
     val weatherDescription: String,
+    val currentTemp: Double,
     val tempMin: Double,
     val tempMax: Double,
     val humidity: Int,
     val pressure: Int,
+    val time: String,
 )

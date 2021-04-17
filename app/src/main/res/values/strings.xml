@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_city">Add City</string>
+    <string name="search">Search</string>
+    <string name="cancel">cancel</string>
+    <string name="ok">ok</string>
 </resources>

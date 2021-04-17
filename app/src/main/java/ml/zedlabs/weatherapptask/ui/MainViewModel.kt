@@ -1,5 +1,7 @@
 package ml.zedlabs.weatherapptask.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -18,6 +20,7 @@ class MainViewModel @Inject constructor(
     var _data = repository.cityWeatherList.asLiveData()
     val data: LiveData<List<CityWeatherData>> = _data
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getCityWeatherData(city: String) {
         viewModelScope.launch {
             val dt = repository.getWeatherData(city = city)
@@ -25,4 +28,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun deleteCityData(data: CityWeatherData){
+        viewModelScope.launch {
+            repository.deleteCityData(data)
+        }
+    }
 }

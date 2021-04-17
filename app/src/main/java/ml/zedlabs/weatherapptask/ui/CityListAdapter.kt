@@ -1,18 +1,25 @@
 package ml.zedlabs.weatherapptask.ui
 
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ml.zedlabs.weatherapptask.repository.models.WeatherResponse
+import java.util.*
+import android.R.attr.name
+import android.R.attr.name
+import android.annotation.SuppressLint
 
-class CityListAdapter(private val list: List<String>, private val onClick: (String) -> Unit) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>() {
+class CityListAdapter(
+    private val list: MutableList<String>,
+    private val onClick: (String) -> Unit
+) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>(), Filterable {
+
+    private val originalList = ArrayList(list)
 
     class CityViewHolder(tv: TextView) : RecyclerView.ViewHolder(tv) {
-        var textView : TextView = tv
-
-        init {
-            tv.setOnClickListener {  }
-        }
+        var textView: TextView = tv
 
         fun bind(data: String, clickListener: (String) -> Unit) {
             itemView.setOnClickListener { clickListener(data) }
@@ -32,4 +39,38 @@ class CityListAdapter(private val list: List<String>, private val onClick: (Stri
     }
 
     override fun getItemCount(): Int = list.size
+
+    override fun getFilter(): Filter {
+        return cityFilter
+    }
+
+    private val cityFilter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = mutableListOf<String>()
+
+            if (constraint == null || constraint.isEmpty()) {
+                filteredList.addAll(originalList)
+            } else {
+                originalList.forEach {
+                    if (it.contains(constraint.toString(), true))
+                        filteredList.add(it)
+                }
+            }
+
+            val results = FilterResults()
+            results.values = filteredList
+
+            return results
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            list.clear()
+            list.addAll(results?.values as List<String>)
+            notifyDataSetChanged()
+        }
+
+    }
+
+
 }

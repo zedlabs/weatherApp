@@ -1,7 +1,7 @@
 package ml.zedlabs.weatherapptask.util
 
 object Cdata {
-    val cityList = listOf(
+    val cityList = mutableListOf(
         "Delhi",
         "Bangalore",
         "Mumbai",

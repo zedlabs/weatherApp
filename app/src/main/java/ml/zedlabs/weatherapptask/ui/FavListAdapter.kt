@@ -29,20 +29,24 @@ class FavListAdapter(private val listener: OnItemClickListener) :
             binding.root.setOnClickListener {
                 listener.onItemClick(getItem(adapterPosition))
             }
+            binding.deleteBtn.setOnClickListener {
+                listener.onDeleteClick(getItem(adapterPosition))
+            }
         }
 
         fun bind(item: CityWeatherData) {
             binding.apply {
                 tvCityName.text = item.city
-//                rankTextView.text = adapterPosition.formattedPosition()
-//                linkTextView.text = story.url?.stripUrl()
-//                infoTextView.text = Pair(story.score, story.by).pointsAndAuthorString()
+                tvWeatherDesc.text = item.weatherDescription
+                tvTemp.text = item.currentTemp.toString()
+                tvDt.text = item.time
             }
         }
     }
 
     interface OnItemClickListener {
         fun onItemClick(item: CityWeatherData)
+        fun onDeleteClick(item: CityWeatherData)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<CityWeatherData>() {

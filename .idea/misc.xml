@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/layout/fav_list_item.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/layout/fav_list_item.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/layout/fragment_details.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/layout/fragment_list.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/layout/fragment_search.xml" value="0.353125" />
+        <entry key="..\:/AndroidProjects/weatherAppTask/app/src/main/res/menu/options_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
