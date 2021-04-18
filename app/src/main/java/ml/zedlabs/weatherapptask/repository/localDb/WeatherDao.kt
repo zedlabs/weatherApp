@@ -19,6 +19,9 @@ interface WeatherDao {
     @Query("SELECT * FROM weather WHERE id == :current")
     fun getDetailsById(current: Int): List<CityWeatherData>
 
+    @Query("SELECT * FROM weather WHERE city == :current")
+    suspend fun getDetailsByName(current: String): List<CityWeatherData>
+
     @Delete
     suspend fun deleteItem(data: CityWeatherData)
 

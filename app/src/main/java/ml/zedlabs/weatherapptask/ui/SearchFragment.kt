@@ -20,7 +20,7 @@ class SearchFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    lateinit var clAdapter : CityListAdapter
+    lateinit var clAdapter: CityListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,6 @@ class SearchFragment : Fragment() {
         clAdapter = CityListAdapter(Cdata.cityList) {
             viewModel.getCityWeatherData(it)
             Toast.makeText(requireContext(), "$it added!", Toast.LENGTH_SHORT).show()
-
         }
         binding.recyclerViewCityList.apply {
             adapter = clAdapter

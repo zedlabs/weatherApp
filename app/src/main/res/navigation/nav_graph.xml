@@ -31,5 +31,9 @@
         android:id="@+id/detailsFragment"
         android:name="ml.zedlabs.weatherapptask.ui.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="wData"
+            app:argType="ml.zedlabs.weatherapptask.repository.models.CityWeatherData" />
+    </fragment>
 </navigation>

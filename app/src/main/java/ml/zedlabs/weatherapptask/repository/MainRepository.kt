@@ -20,8 +20,8 @@ class MainRepository @Inject constructor(
 
     val cityWeatherList: Flow<List<CityWeatherData>> = dao.getAll()
 
-    suspend fun getWeatherData(city: String): WeatherResponse {
-        return jsonApi.getWeatherData(city, AppModule.apiKey).body()!!
+    suspend fun getWeatherData(city: String): WeatherResponse? {
+        return jsonApi.getWeatherData(city, AppModule.apiKey).body()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -30,6 +30,10 @@ class MainRepository @Inject constructor(
             if (dao.getDetailsById(weatherResponse.id).isEmpty())
                 dao.insertCityWeather(weatherResponse.toCWD())
         }
+    }
+
+    suspend fun getCityWeatherById(name: String) = withContext(Dispatchers.IO){
+        dao.getDetailsByName(name)
     }
 
     suspend fun deleteCityData(data: CityWeatherData) = dao.deleteItem(data)

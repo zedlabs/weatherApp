@@ -28,6 +28,11 @@ class ListFragment : Fragment(), FavListAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.fabSearch.setOnClickListener {
             findNavController().navigate(R.id.listToSearch)
@@ -41,8 +46,6 @@ class ListFragment : Fragment(), FavListAdapter.OnItemClickListener {
         viewModel.data.observe(viewLifecycleOwner, {
             favAdapter.submitList(it)
         })
-
-        return binding.root
     }
 
     override fun onDestroyView() {
@@ -51,7 +54,8 @@ class ListFragment : Fragment(), FavListAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(item: CityWeatherData) {
-
+        val action = ListFragmentDirections.listToDetails(item)
+        findNavController().navigate(action)
     }
 
     override fun onDeleteClick(item: CityWeatherData) {
