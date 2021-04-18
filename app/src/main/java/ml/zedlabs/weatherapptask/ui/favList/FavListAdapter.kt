@@ -1,4 +1,4 @@
-package ml.zedlabs.weatherapptask.ui
+package ml.zedlabs.weatherapptask.ui.favList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

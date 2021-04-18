@@ -1,16 +1,12 @@
-package ml.zedlabs.weatherapptask.ui
+package ml.zedlabs.weatherapptask.ui.cityList
 
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ml.zedlabs.weatherapptask.repository.models.WeatherResponse
 import java.util.*
-import android.R.attr.name
-import android.R.attr.name
 import android.annotation.SuppressLint
-import android.app.ActionBar
 
 class CityListAdapter(
     private val list: MutableList<String>,

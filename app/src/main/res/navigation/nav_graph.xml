@@ -12,12 +12,12 @@
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="ml.zedlabs.weatherapptask.ui.SearchFragment"
+        android:name="ml.zedlabs.weatherapptask.ui.cityList.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="ml.zedlabs.weatherapptask.ui.ListFragment"
+        android:name="ml.zedlabs.weatherapptask.ui.favList.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="ml.zedlabs.weatherapptask.ui.DetailsFragment"
+        android:name="ml.zedlabs.weatherapptask.ui.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument

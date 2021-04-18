@@ -1,4 +1,4 @@
-package ml.zedlabs.weatherapptask.ui
+package ml.zedlabs.weatherapptask.ui.favList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ml.zedlabs.weatherapptask.R
 import ml.zedlabs.weatherapptask.databinding.FragmentListBinding
 import ml.zedlabs.weatherapptask.repository.models.CityWeatherData
+import ml.zedlabs.weatherapptask.ui.MainViewModel
 
 @AndroidEntryPoint
 class ListFragment : Fragment(), FavListAdapter.OnItemClickListener {

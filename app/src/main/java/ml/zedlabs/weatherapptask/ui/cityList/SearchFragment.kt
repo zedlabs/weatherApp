@@ -1,4 +1,4 @@
-package ml.zedlabs.weatherapptask.ui
+package ml.zedlabs.weatherapptask.ui.cityList
 
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +13,7 @@ import ml.zedlabs.weatherapptask.R
 import ml.zedlabs.weatherapptask.databinding.FragmentSearchBinding
 import ml.zedlabs.weatherapptask.util.Cdata
 import androidx.appcompat.widget.SearchView
+import ml.zedlabs.weatherapptask.ui.MainViewModel
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
