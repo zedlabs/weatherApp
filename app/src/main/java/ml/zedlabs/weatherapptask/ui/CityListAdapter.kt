@@ -10,6 +10,7 @@ import java.util.*
 import android.R.attr.name
 import android.R.attr.name
 import android.annotation.SuppressLint
+import android.app.ActionBar
 
 class CityListAdapter(
     private val list: MutableList<String>,
@@ -28,8 +29,8 @@ class CityListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val tv = TextView(parent.context)
-        tv.setPadding(8, 8, 8, 16)
-        tv.textSize = 24F
+        tv.setPadding(8, 8, 16, 16)
+        tv.textSize = 28F
         return CityViewHolder(tv)
     }
 
